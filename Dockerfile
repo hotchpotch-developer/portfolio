@@ -1,45 +1,56 @@
+# Use official PHP image with necessary extensions
 FROM php:8.3-fpm
+
+# Set working directory
+WORKDIR /var/www/html
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    curl \
-    zip \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
-    libonig-dev \
-    libxml2-dev \
-    libzip-dev \
-    nginx
-
-# Install PHP extensions
-RUN docker-php-ext-install \
-    pdo \
-    pdo_mysql \
-    mbstring \
     zip \
-    exif \
-    pcntl
+    unzip \
+    git \
+    curl \
+    libpq-dev \
+    libonig-dev \
+    procps \
+    openssl \
+    libzip-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd mbstring pdo pdo_pgsql zip
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-WORKDIR /var/www
-
+# Copy application files
 COPY . .
 
-RUN composer install --no-dev --optimize-autoloader
+# Set proper permissions for the storage and cache directories
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-RUN cp .env.example .env
+# Install PHP dependencies
+RUN composer install --ignore-platform-reqs
 
+# Copy default environment file
+COPY .env.example .env
+
+# Generate application key
 RUN php artisan key:generate
 
-RUN chown -R www-data:www-data storage bootstrap/cache
+# Ensure the storage directory is linked correctly
+RUN php artisan storage:link
 
-COPY nginx.conf /etc/nginx/sites-enabled/default
+# Run database migrations and seeders
+RUN php artisan migrate:fresh
 
-EXPOSE 10000
+# Expose PHP-FPM port (9000)
+EXPOSE 9000
 
-CMD service php8.3-fpm start && nginx -g "daemon off;"
+# Set user to www-data for security
+USER www-data
+
+# Start PHP-FPM
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=10000"]
