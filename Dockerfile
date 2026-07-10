@@ -43,6 +43,10 @@ RUN php artisan key:generate
 # Ensure the storage directory is linked correctly
 RUN php artisan storage:link
 
+# remove the cache
+RUN php artisan config:clear
+RUN php artisan cache:clear
+
 # Run database migrations and seeders
 RUN php artisan migrate:fresh
 
