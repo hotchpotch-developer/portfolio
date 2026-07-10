@@ -34,6 +34,12 @@ RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 # Install PHP dependencies
 RUN composer install --ignore-platform-reqs
 
+RUN apt-get update && apt-get install -y nodejs npm
+
+RUN npm install
+
+RUN npm run build
+
 # Copy default environment file
 COPY .env.example .env
 
