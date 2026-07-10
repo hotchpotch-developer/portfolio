@@ -43,12 +43,12 @@ RUN php artisan key:generate
 # Ensure the storage directory is linked correctly
 RUN php artisan storage:link
 
+# Run database migrations and seeders
+RUN php artisan migrate:fresh
+
 # remove the cache
 RUN php artisan config:clear
 RUN php artisan cache:clear
-
-# Run database migrations and seeders
-RUN php artisan migrate:fresh
 
 # Expose PHP-FPM port (9000)
 EXPOSE 9000
