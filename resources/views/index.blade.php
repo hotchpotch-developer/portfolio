@@ -12,7 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100..900&amp;family=Outfit:wght@100..900&amp;display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/css/%40tabler/icons-webfont%40latest/dist/tabler-icons.min.css') }}">
+    <link rel="stylesheet" href="assets/css/%40tabler/icons-webfont%40latest/dist/tabler-icons.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/swiper.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
