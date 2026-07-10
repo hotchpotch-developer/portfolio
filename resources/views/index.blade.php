@@ -567,13 +567,13 @@
         <span class="scroll-progress"></span>
         <i class="ti ti-arrow-up"></i>
     </a>
-    <script src="{{ asset('assets/javascript/jquery.js') }}"></script>
-    <script src="{{ asset('assets/javascript/gsap.js') }}"></script>
-    <script src="{{ asset('assets/javascript/smooth-scroll.js') }}"></script>
-    <script src="{{ asset('assets/javascript/swiper-bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/javascript/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/javascript/split-text.js') }}"></script>
-    <script src="{{ asset('assets/javascript/ScrollTrigger.min.js') }}"></script>
-    <script src="{{ asset('assets/javascript/script.js') }}"></script>
+    <script src="assets/javascript/jquery.js"></script>
+    <script src="assets/javascript/gsap.js"></script>
+    <script src="assets/javascript/smooth-scroll.js"></script>
+    <script src="assets/javascript/swiper-bundle.min.js"></script>
+    <script src="assets/javascript/bootstrap.min.js"></script>
+    <script src="assets/javascript/split-text.js"></script>
+    <script src="assets/javascript/ScrollTrigger.min.js"></script>
+    <script src="assets/javascript/script.js"></script>
 </body>
 </html>
